@@ -4,8 +4,10 @@ const corsMiddleware = require("cors");
 const teamsRouter = require("./routers/teams");
 
 const app = express();
+const bodyParserMiddleware = express.json();
 
 app.use(corsMiddleware());
+app.use(bodyParserMiddleware);
 
 app.get("/", (req, res) => {
   res.send("Hi from Express");
