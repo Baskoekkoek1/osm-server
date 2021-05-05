@@ -17,6 +17,40 @@ router.get("/all", async (req, res) => {
   }
 });
 
+router.get("/results", async (req, res) => {
+  try {
+    const allResults = await Match.findAll();
+    return res.status(200).send(allResults);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.put("/reset", async (req, res) => {
+  try {
+    const allTeams = await Team.findAll();
+    const newRanking = allTeams.map(async (team) => {
+      await team.update({
+        played: 0,
+        won: 0,
+        lost: 0,
+        draw: 0,
+        goalsFor: 0,
+        goalsAgainst: 0,
+        points: 0,
+      });
+    });
+    const allMatches = await Match.findAll();
+    allMatches.forEach(async (match) => {
+      await match.destroy();
+    });
+
+    res.status(200).send(allTeams);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.put("/match", async (req, res) => {
   // console.log(req.body);
   try {
