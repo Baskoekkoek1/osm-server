@@ -3,5 +3,13 @@
     "url": "postgres://jtndqpoo:A9bODTXMW2da_zZPpwhl3VblECOK7h3w@hattie.db.elephantsql.com:5432/jtndqpoo",
     "dialect": "postgres",
     "operatorsAliases": "0"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialectOptions": {
+      "ssl": {
+        "rejectUnauthorized": false
+      }
+    }
   }
 }
